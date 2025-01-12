@@ -1,0 +1,25 @@
+name: Auto Commit Every 12 Hours
+
+on:
+  schedule:
+    # Run every 12 hours
+    - cron: "0 */12 * * *"
+
+jobs:
+  auto-commit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Make changes
+        run: |
+          echo "Auto-commit made on $(date)" >> auto-commit-log.txt
+
+      - name: Commit and push changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add .
+          git commit -m "Automated commit on $(date)"
+          git push
