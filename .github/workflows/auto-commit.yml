@@ -4,6 +4,7 @@ on:
   schedule:
     # Run every 12 hours
     - cron: "0 */12 * * *"
+  workflow_dispatch: # Add this line to enable manual runs
 
 jobs:
   auto-commit:
